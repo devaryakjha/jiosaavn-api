@@ -1,6 +1,6 @@
 // create download links for different bitrates
 export const createDownloadLinks = (link?: string) => {
-  if (!link) return false
+  if (!link) return []
 
   const qualities = [
     { id: '_12', bitrate: '12kbps' },
@@ -14,22 +14,22 @@ export const createDownloadLinks = (link?: string) => {
     qualities.map((quality) => ({
       quality: quality.bitrate,
       link: link.replace('preview.saavncdn.com', 'aac.saavncdn.com').replace('_96_p', quality.id),
-    })) || false
+    })) || []
 
   return links
 }
 
 // create image links for different resolutions
-export const createImageLinks = (link?: string) => {
-  if (!link) return false
-
+export const createImageLinks = (link = 'http://localhost:3000/audio.jpg') => {
   const qualities = ['50x50', '150x150', '500x500']
 
   return (
     qualities.map((quality) => ({
       quality,
-      link: link.includes('150x150') ? link.replace('150x150', quality) : link.replace('50x50', quality),
-    })) || false
+      link: (link || 'http://localhost:3000/audio.jpg')
+        .replace(new RegExp('\\d{1,3}x\\d{1,3}'), quality)
+        .replace(new RegExp('\\d{1,3}x\\d{1,3}_\\d{1,3}x\\d{1,3}', 'i'), quality),
+    })) || []
   )
 }
 

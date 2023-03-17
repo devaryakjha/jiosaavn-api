@@ -1,4 +1,5 @@
 import {} from 'dotenv/config'
+import path from 'path'
 import cors from 'cors'
 import express from 'express'
 import morgan from 'morgan'
@@ -11,6 +12,7 @@ import type { Request, Response } from 'express'
 import type { Config } from './interfaces/config.interface'
 import type { Route } from './interfaces/route.interface'
 
+const dir = path.join(__dirname, 'assets')
 export class App {
   public app: express.Application
   public port: number
@@ -31,6 +33,7 @@ export class App {
 
   private initializeMiddlewares() {
     this.app.use(morgan(this.config.log.format))
+    this.app.use(express.static(dir))
     this.app.use(cors())
     this.app.use(express.json())
     this.app.use(express.urlencoded({ extended: true }))
