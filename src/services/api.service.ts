@@ -39,10 +39,19 @@ export class ApiService {
     })
   }
 
-  protected http<T>(url: string, isVersion4: boolean, query?: Record<string, string | number>): Promise<T> {
+  protected async http<T>(url: string, isVersion4: boolean, query?: Record<string, string | number>) {
     const v4 = isVersion4 ? { api_version: 4 } : undefined
-    const queryParams = { ...v4, ...query }
+    //app_version=5.18.3&api_version=4&readable_version=5.18.3&n=30&v=79&_format=json
+    const searchParams = {
+      _format: 'json',
+      __call: url,
+      ...v4,
+      ...query,
+    }
 
-    return this.httpClient<T>({ searchParams: { __call: url, ...queryParams } }).json()
+    const response = await this.httpClient({ searchParams }).json<T>()
+    // eslint-disable-next-line no-console
+    console.log({ searchParams, response })
+    return response
   }
 }
