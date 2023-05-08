@@ -1,5 +1,6 @@
 import { globalConstants } from '../constants'
 import { PlaylistsService } from '../services/playlists.service'
+import type { PlaylistResponse } from '../interfaces/playlist.interface'
 import type { CustomResponse } from '../interfaces/response.interface'
 import type { NextFunction, Request, RequestHandler, Response } from 'express'
 
@@ -12,7 +13,7 @@ export class PlaylistsController {
 
   public playlistDetails: RequestHandler = async (
     req: Request,
-    res: Response<CustomResponse<any>>,
+    res: Response<CustomResponse<PlaylistResponse>>,
     next: NextFunction
   ) => {
     try {
