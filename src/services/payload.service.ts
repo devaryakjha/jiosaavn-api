@@ -320,6 +320,7 @@ export class PayloadService extends ApiService {
       image: createImageLinks(playlist?.image),
       url: playlist?.perma_url,
       songs: playlist?.songs?.map((song: SongRequest) => this.songPayload(song)) ?? [],
+      og_payload: playlist,
     }
 
     return playlistPayload
