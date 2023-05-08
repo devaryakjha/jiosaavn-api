@@ -319,12 +319,7 @@ export class PayloadService extends ApiService {
       shares: playlist?.share,
       image: createImageLinks(playlist?.image),
       url: playlist?.perma_url,
-      songs: [] as SongResponse[],
-    }
-
-    // if playlist details contain song list
-    if (playlist.songs) {
-      playlistPayload.songs = playlist?.songs?.map((song: SongRequest) => this.songPayload(song))
+      songs: playlist?.songs?.map((song: SongRequest) => this.songPayload(song)) ?? [],
     }
 
     return playlistPayload
