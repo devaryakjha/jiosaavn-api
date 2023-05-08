@@ -1,3 +1,5 @@
+import { hostname } from 'os'
+
 // create download links for different bitrates
 export const createDownloadLinks = (link?: string) => {
   if (!link) return []
@@ -20,13 +22,13 @@ export const createDownloadLinks = (link?: string) => {
 }
 
 // create image links for different resolutions
-export const createImageLinks = (link = 'http://localhost:3000/audio.jpg') => {
+export const createImageLinks = (link = `${hostname()}/audio.jpg`) => {
   const qualities = ['50x50', '150x150', '500x500']
 
   return (
     qualities.map((quality) => ({
       quality,
-      link: (link || 'http://localhost:3000/audio.jpg')
+      link: link
         .replace(new RegExp('\\d{1,3}x\\d{1,3}'), quality)
         .replace(new RegExp('\\d{1,3}x\\d{1,3}_\\d{1,3}x\\d{1,3}', 'i'), quality),
     })) || []
