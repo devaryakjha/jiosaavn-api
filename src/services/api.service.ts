@@ -5,13 +5,15 @@ import type { Config } from '../interfaces/config.interface'
 
 export class ApiService {
   private httpClient: Got
+  protected config: Config
   private baseURL: Config['baseURL']
   protected endpoints: Config['endpoint']
 
   constructor() {
-    const { baseURL, endpoint } = getConfig()
-    this.baseURL = baseURL
-    this.endpoints = endpoint
+    const config = getConfig()
+    this.config = config
+    this.baseURL = config.baseURL
+    this.endpoints = config.endpoint
 
     this.httpClient = got.extend({
       prefixUrl: this.baseURL,
