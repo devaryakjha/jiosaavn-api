@@ -1,3 +1,4 @@
+import { getConfig } from 'configs'
 import { createDownloadLinks, createImageLinks, sanitizeLyrics } from '../utils/link'
 import { ApiService } from '../services/api.service'
 import type { ModulesRequest, ModulesResponse } from '../interfaces/modules.interface'
@@ -305,6 +306,7 @@ export class PayloadService extends ApiService {
   }
 
   protected playlistPayload = (playlist: PlaylistRequest) => {
+    const config = getConfig()
     const playlistPayload: PlaylistResponse = {
       id: playlist?.listid,
       userId: playlist?.uid,
@@ -320,7 +322,7 @@ export class PayloadService extends ApiService {
       image: createImageLinks(playlist?.image),
       url: playlist?.perma_url,
       songs: playlist?.songs?.map((song: SongRequest) => this.songPayload(song)) ?? [],
-      og_payload: playlist,
+      og_payload: { ...playlist, config },
     }
 
     return playlistPayload

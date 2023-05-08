@@ -50,8 +50,7 @@ export class ApiService {
     }
 
     const response = await this.httpClient({ searchParams }).json<T>()
-    // eslint-disable-next-line no-console
-    console.log({ searchParams, response })
+
     return response
   }
 }
