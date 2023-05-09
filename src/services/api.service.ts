@@ -29,9 +29,18 @@ export class ApiService {
             // set default language in cookie
             const languageHeader = (options.searchParams as URLSearchParams).get('language') ?? 'english'
 
-            options.headers = {
-              cookie: `L=${encodeURIComponent(languageHeader)}; gdpr_acceptance=true; DL=english`,
-            }
+            options.cookieJar?.setCookie(
+              `L=${encodeURIComponent(languageHeader)}; gdpr_acceptance=true; DL=english`,
+              this.baseURL,
+              (error, result) => {
+                if (error) {
+                  console.error(error, result)
+                }
+              }
+            )
+            // options.headers = {
+            //   cookie: `L=${encodeURIComponent(languageHeader)}; gdpr_acceptance=true; DL=english`,
+            // }
           },
         ],
       },
