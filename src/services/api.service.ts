@@ -23,6 +23,21 @@ export class ApiService {
         ['ctx', 'web6dot0'],
       ]),
       responseType: 'json',
+      headers: {
+        cookie: 'L=english; gdpr_acceptance=true; DL=english',
+      },
+      hooks: {
+        beforeRequest: [
+          (options) => {
+            // set default language in cookie
+            const languageHeader = (options.searchParams as URLSearchParams).get('language') || 'english'
+
+            options.headers = {
+              cookie: `L=${encodeURIComponent(languageHeader)}; gdpr_acceptance=true; DL=english`,
+            }
+          },
+        ],
+      },
     })
   }
 
