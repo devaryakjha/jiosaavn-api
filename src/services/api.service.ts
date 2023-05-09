@@ -23,36 +23,28 @@ export class ApiService {
         ['ctx', 'web6dot0'],
       ]),
       responseType: 'json',
-      headers: {
-        cookie: 'L=english; gdpr_acceptance=true; DL=english',
-      },
-      hooks: {
-        beforeRequest: [
-          (options) => {
-            // set default language in cookie
-            const languageHeader = new URLSearchParams(options.searchParams as string).get('language') || 'english'
+      // headers: {
+      //   cookie: 'L=english; gdpr_acceptance=true; DL=english',
+      // },
+      // hooks: {
+      //   beforeRequest: [
+      //     (options) => {
+      //       // set default language in cookie
+      //       const languageHeader = new URLSearchParams(options.searchParams as string).get('language') || 'english'
 
-            options.headers = {
-              cookie: `L=${encodeURIComponent(languageHeader)}; gdpr_acceptance=true; DL=english`,
-            }
-          },
-        ],
-      },
+      //       options.headers = {
+      //         cookie: `L=${encodeURIComponent(languageHeader)}; gdpr_acceptance=true; DL=english`,
+      //       }
+      //     },
+      //   ],
+      // },
     })
   }
 
-  protected async http<T>(url: string, isVersion4: boolean, query?: Record<string, string | number>) {
+  protected http<T>(url: string, isVersion4: boolean, query?: Record<string, string | number>): Promise<T> {
     const v4 = isVersion4 ? { api_version: 4 } : undefined
-    //app_version=5.18.3&api_version=4&readable_version=5.18.3&n=30&v=79&_format=json
-    const searchParams = {
-      _format: 'json',
-      __call: url,
-      ...v4,
-      ...query,
-    }
+    const queryParams = { ...v4, ...query }
 
-    const response = await this.httpClient({ searchParams }).json<T>()
-
-    return response
+    return this.httpClient<T>({ searchParams: { __call: url, ...queryParams } }).json()
   }
 }
