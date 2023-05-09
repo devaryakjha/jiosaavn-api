@@ -30,7 +30,7 @@ An Unofficial JioSaavn API for downloading songs in 320kbps quality for free.
 - Clone the Repo
 
   ```sh
-  git clone https://github.com/sumitkolhe/jiosaavn-api
+  git clone https://github.com/devaryakjha/jiosaavn-api
 
   cd jiosaavn-api
   ```
@@ -49,7 +49,7 @@ An Unofficial JioSaavn API for downloading songs in 320kbps quality for free.
 
 ## ☁️ Host your own instance
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/sumitkolhe/jiosaavn-api)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/devaryakjha/jiosaavn-api)
 
 ## 📜 License
 

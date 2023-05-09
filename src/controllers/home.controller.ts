@@ -97,7 +97,7 @@ export class HomeController {
                   <a
                     target="_blank"
                     class="bg-white bg-opacity-0 border-b border-white border-opacity-5 relative -ml-px p-8 hover:bg-opacity-[3%] duration-100 group sm:col-span-4"
-                    href="https://github.com/sumitkolhe/jiosaavn-api"
+                    href="https://github.com/devaryakjha/jiosaavn-api"
                   >
                     <div class="flex flex-col">
                       <span
@@ -117,7 +117,7 @@ export class HomeController {
                   <a
                     target="_blank"
                     class="bg-white bg-opacity-0 border-b border-white border-opacity-5 relative -ml-px p-8 hover:bg-opacity-[3%] duration-100 group sm:col-span-4"
-                    href="https://github.com/sumitkolhe/jiosaavn-api/issues"
+                    href="https://github.com/devaryakjha/jiosaavn-api/issues"
                   >
                     <div class="flex flex-col">
                       <span
@@ -138,7 +138,7 @@ export class HomeController {
                   <a
                   target="_blank"
                   class="bg-white bg-opacity-0 border-b border-white border-opacity-5 relative -ml-px p-8 hover:bg-opacity-[3%] duration-100 group sm:col-span-4"
-                  href="https://github.com/sumitkolhe"
+                  href="https://github.com/devaryakjha"
                 >
                   <div class="flex flex-col">
                     <span
