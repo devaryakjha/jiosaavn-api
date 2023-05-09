@@ -27,20 +27,13 @@ export class ApiService {
         beforeRequest: [
           (options) => {
             // set default language in cookie
-            const languageHeader = (options.searchParams as URLSearchParams).get('language') ?? 'english'
+            const languageHeader = (options.searchParams as URLSearchParams).get('language')
 
-            options.cookieJar?.setCookie(
-              `L=${encodeURIComponent(languageHeader)}; gdpr_acceptance=true; DL=english`,
-              this.baseURL,
-              (error, result) => {
-                if (error) {
-                  console.error(error, result)
-                }
+            if (languageHeader !== null) {
+              options.headers = {
+                cookie: `L=${encodeURIComponent(languageHeader)}; gdpr_acceptance=true; DL=english`,
               }
-            )
-            // options.headers = {
-            //   cookie: `L=${encodeURIComponent(languageHeader)}; gdpr_acceptance=true; DL=english`,
-            // }
+            }
           },
         ],
       },
