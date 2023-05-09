@@ -10,6 +10,7 @@
     "dev": "cross-env NODE_ENV=development tsx watch ./src/server.ts",
     "start": "npm run build && cross-env NODE_ENV=production node public/server.js",
     "build": "tsc",
+    "build:docs": "cd docs && yarn build",
     "format": "prettier --write \"./**/*.{js,ts,json}\"",
     "lint": "eslint . --ext \".ts\"",
     "lint:fix": "eslint --fix --ext .js,.ts .",
