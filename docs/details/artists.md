@@ -12,13 +12,13 @@ icon: person-fill
 HTTP
 
 ```bash
-https://saavn.me/artists?link=https://www.jiosaavn.com/artist/sia-/C4hxFiXrHws_
+https://saavn.aryak.dev/artists?link=https://www.jiosaavn.com/artist/sia-/C4hxFiXrHws_
 ```
 
 CURL
 
 ```bash
-curl -X GET 'https://saavn.me/artists?link=https://www.jiosaavn.com/song/thunderclouds/RT8zcBh9eUc' \
+curl -X GET 'https://saavn.aryak.dev/artists?link=https://www.jiosaavn.com/song/thunderclouds/RT8zcBh9eUc' \
  -H 'content-type: application/json'
 ```
 
@@ -75,7 +75,7 @@ curl -X GET 'https://saavn.me/artists?link=https://www.jiosaavn.com/song/thunder
 
 +++
 
-| Query Paramter                                | Description                           | Required                               |
+| Query Paramter                          | Description                           | Required                               |
 | --------------------------------------- | ------------------------------------- | -------------------------------------- |
 | [!badge variant="contrast" text="link"] | Song link from <https://jiosaavn.com> | [!badge variant="primary" text="True"] |
 
@@ -86,13 +86,13 @@ curl -X GET 'https://saavn.me/artists?link=https://www.jiosaavn.com/song/thunder
 HTTP
 
 ```bash
-https://saavn.me/artists?id=568707
+https://saavn.aryak.dev/artists?id=568707
 ```
 
 CURL
 
 ```bash
-curl -X GET 'https://saavn.me/artists?id=568707' \
+curl -X GET 'https://saavn.aryak.dev/artists?id=568707' \
  -H 'content-type: application/json'
 ```
 
@@ -151,7 +151,7 @@ curl -X GET 'https://saavn.me/artists?id=568707' \
 
 | Paramter                              | Description | Required                               |
 | ------------------------------------- | ----------- | -------------------------------------- |
-| [!badge variant="contrast" text="id"] | Artist ID     | [!badge variant="primary" text="True"] |
+| [!badge variant="contrast" text="id"] | Artist ID   | [!badge variant="primary" text="True"] |
 
 ## Artist Songs by artist ID
 
@@ -160,13 +160,13 @@ curl -X GET 'https://saavn.me/artists?id=568707' \
 HTTP
 
 ```bash
-https://saavn.me/artists/568707/songs?page=1
+https://saavn.aryak.dev/artists/568707/songs?page=1
 ```
 
 CURL
 
 ```bash
-curl -X GET 'https://saavn.me/artists/568707/songs?page=1' \
+curl -X GET 'https://saavn.aryak.dev/artists/568707/songs?page=1' \
  -H 'content-type: application/json'
 ```
 
@@ -777,15 +777,15 @@ curl -X GET 'https://saavn.me/artists/568707/songs?page=1' \
 
 +++
 
-| Route Paramter                              | Description | Required                               |
+| Route Paramter                        | Description | Required                               |
 | ------------------------------------- | ----------- | -------------------------------------- |
-| [!badge variant="contrast" text="id"] | Artist ID     | [!badge variant="primary" text="True"] |
+| [!badge variant="contrast" text="id"] | Artist ID   | [!badge variant="primary" text="True"] |
 
-| Query Paramter                              | Description | Required                               |
-| ------------------------------------- | ----------- | -------------------------------------- |
-| [!badge variant="contrast" text="page"] | Page Number  | [!badge variant="primary" text="False"] |
-| [!badge variant="contrast" text="category"] | Song type. `alphabetical` or `latest`  | [!badge variant="primary" text="False"] |
-| [!badge variant="contrast" text="sort"] | Song sort order. `asc` or `desc`  | [!badge variant="primary" text="False"] |
+| Query Paramter                              | Description                           | Required                                |
+| ------------------------------------------- | ------------------------------------- | --------------------------------------- |
+| [!badge variant="contrast" text="page"]     | Page Number                           | [!badge variant="primary" text="False"] |
+| [!badge variant="contrast" text="category"] | Song type. `alphabetical` or `latest` | [!badge variant="primary" text="False"] |
+| [!badge variant="contrast" text="sort"]     | Song sort order. `asc` or `desc`      | [!badge variant="primary" text="False"] |
 
 ## Artist Albums by artist ID
 
@@ -794,13 +794,13 @@ curl -X GET 'https://saavn.me/artists/568707/songs?page=1' \
 HTTP
 
 ```bash
-https://saavn.me/artists/568707/albums?page=1
+https://saavn.aryak.dev/artists/568707/albums?page=1
 ```
 
 CURL
 
 ```bash
-curl -X GET 'https://saavn.me/artists/568707/albums?page=1' \
+curl -X GET 'https://saavn.aryak.dev/artists/568707/albums?page=1' \
  -H 'content-type: application/json'
 ```
 
@@ -1929,15 +1929,15 @@ curl -X GET 'https://saavn.me/artists/568707/albums?page=1' \
 
 +++
 
-| Route Paramter                              | Description | Required                               |
+| Route Paramter                        | Description | Required                               |
 | ------------------------------------- | ----------- | -------------------------------------- |
-| [!badge variant="contrast" text="id"] | Artist ID     | [!badge variant="primary" text="True"] |
+| [!badge variant="contrast" text="id"] | Artist ID   | [!badge variant="primary" text="True"] |
 
-| Query Paramter                              | Description | Required                               |
-| ------------------------------------- | ----------- | -------------------------------------- |
-| [!badge variant="contrast" text="page"] | Page Number  | [!badge variant="primary" text="False"] |
-| [!badge variant="contrast" text="category"] | Album type. `alphabetical` or `latest`  | [!badge variant="primary" text="False"] |
-| [!badge variant="contrast" text="sort"] | Album sort order. `asc` or `desc`  | [!badge variant="primary" text="False"] |
+| Query Paramter                              | Description                            | Required                                |
+| ------------------------------------------- | -------------------------------------- | --------------------------------------- |
+| [!badge variant="contrast" text="page"]     | Page Number                            | [!badge variant="primary" text="False"] |
+| [!badge variant="contrast" text="category"] | Album type. `alphabetical` or `latest` | [!badge variant="primary" text="False"] |
+| [!badge variant="contrast" text="sort"]     | Album sort order. `asc` or `desc`      | [!badge variant="primary" text="False"] |
 
 ## Artist Recommended Songs by artist ID and song ID
 
@@ -1950,16 +1950,15 @@ Note: Song ID is required to get the recommendations based on the song.
 HTTP
 
 ```bash
-https://saavn.me/artists/568707/recommendations/zikdtWU6
+https://saavn.aryak.dev/artists/568707/recommendations/zikdtWU6
 ```
 
 CURL
 
 ```bash
-curl -X GET 'https://saavn.me/artists/568707/recommendations/zikdtWU6' \
+curl -X GET 'https://saavn.aryak.dev/artists/568707/recommendations/zikdtWU6' \
  -H 'content-type: application/json'
 ```
-
 
 +++ Response
 
@@ -2934,11 +2933,11 @@ curl -X GET 'https://saavn.me/artists/568707/recommendations/zikdtWU6' \
 
 +++
 
-| Route Paramter                              | Description | Required                               |
+| Route Paramter                        | Description | Required                               |
 | ------------------------------------- | ----------- | -------------------------------------- |
-| [!badge variant="contrast" text="id"] | Artist ID     | [!badge variant="primary" text="True"] |
+| [!badge variant="contrast" text="id"] | Artist ID   | [!badge variant="primary" text="True"] |
 | [!badge variant="contrast" text="id"] | Song ID     | [!badge variant="primary" text="True"] |
 
-| Query Paramter                              | Description | Required                               |
-| ------------------------------------- | ----------- | -------------------------------------- |
-| [!badge variant="contrast" text="language"] | Songs language  | [!badge variant="primary" text="False"] |
+| Query Paramter                              | Description    | Required                                |
+| ------------------------------------------- | -------------- | --------------------------------------- |
+| [!badge variant="contrast" text="language"] | Songs language | [!badge variant="primary" text="False"] |

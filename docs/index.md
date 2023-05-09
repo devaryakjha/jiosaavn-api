@@ -5,7 +5,7 @@ icon: rocket
 
 # Introduction
 
-[Saavn.me](https://saavn.me) is an unofficial API for JioSaavn for downloading high-quality songs for free.
+[Saavn.aryak.dev](https://saavn.aryak.dev) is an unofficial API for JioSaavn for downloading high-quality songs for free.
 
 ## Features
 
@@ -29,7 +29,7 @@ icon: rocket
 - Clone the Repo
 
   ```sh
-  git clone https://github.com/sumitkolhe/jiosaavn-api
+  git clone https://github.com/devaryakjha/jiosaavn-api
 
   cd jiosaavn-api
   ```
@@ -50,8 +50,8 @@ icon: rocket
 
 You can host your own instance of JioSaavn API on vercel with a click of a button.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/sumitkolhe/jiosaavn-api)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/devaryakjha/jiosaavn-api)
 
 ## License
 
-This project is licensed under the [MIT License](https://opensource.org/licenses/MIT) - see the [LICENSE](https://github.com/sumitkolhe/jiosaavn-api/blob/main/LICENSE) file for details.
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT) - see the [LICENSE](https://github.com/devaryakjha/jiosaavn-api/blob/main/LICENSE) file for details.

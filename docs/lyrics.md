@@ -14,13 +14,13 @@ icon: note
 HTTP
 
 ```bash
-https://saavn.me/lyrics?id=mPTrDSun
+https://saavn.aryak.dev/lyrics?id=mPTrDSun
 ```
 
 CURL
 
 ```bash
-curl -X GET 'https://saavn.me/lyrics?id=mPTrDSun' \
+curl -X GET 'https://saavn.aryak.dev/lyrics?id=mPTrDSun' \
  -H 'content-type: application/json'
 ```
 
@@ -40,6 +40,6 @@ curl -X GET 'https://saavn.me/lyrics?id=mPTrDSun' \
 
 +++
 
-| Query Paramter                                | Description                           | Required                               |
-| --------------------------------------- | ------------------------------------- | -------------------------------------- |
-| [!badge variant="contrast" text="id"] | Song ID | [!badge variant="primary" text="True"] |
+| Query Paramter                        | Description | Required                               |
+| ------------------------------------- | ----------- | -------------------------------------- |
+| [!badge variant="contrast" text="id"] | Song ID     | [!badge variant="primary" text="True"] |
