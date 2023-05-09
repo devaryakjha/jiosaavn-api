@@ -1,8 +1,9 @@
 import { hostname } from 'os'
+import { cipher, util } from 'node-forge'
 
 // create download links for different bitrates
-export const createDownloadLinks = (link?: string) => {
-  if (!link) return []
+export const createDownloadLinks = (encryptedMediaUrl: string) => {
+  if (!encryptedMediaUrl) return false
 
   const qualities = [
     { id: '_12', bitrate: '12kbps' },
@@ -12,11 +13,23 @@ export const createDownloadLinks = (link?: string) => {
     { id: '_320', bitrate: '320kbps' },
   ]
 
+  const key = '38346591'
+  const iv = '00000000'
+
+  const encrypted = util.decode64(encryptedMediaUrl)
+  const decipher = cipher.createDecipher('DES-ECB', util.createBuffer(key, 'utf8'))
+
+  decipher.start({ iv: util.createBuffer(iv, 'utf8') })
+  decipher.update(util.createBuffer(encrypted))
+  decipher.finish()
+
+  const decryptedLink = decipher.output.getBytes()
+
   const links =
     qualities.map((quality) => ({
       quality: quality.bitrate,
-      link: link.replace('preview.saavncdn.com', 'aac.saavncdn.com').replace('_96_p', quality.id),
-    })) || []
+      link: decryptedLink.replace('_96', quality.id),
+    })) || false
 
   return links
 }
