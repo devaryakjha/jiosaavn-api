@@ -65,5 +65,4 @@ export interface PlaylistResponse {
   image: DownloadLink
   url: string
   songs: SongResponse[]
-  og_payload: any
 }
