@@ -109,7 +109,7 @@ export const idSchema = celebrate(
   {
     [Segments.QUERY]: Joi.object().keys({
       id: Joi.string().required(),
-      language: Joi.string().default('english'),
+      language: Joi.string().optional(),
     }),
   },
   { abortEarly: false },
