@@ -24,7 +24,7 @@ export class ApiService {
       },
       headers: {
         'Content-Type': 'application/json',
-        cookie: `L=english; DL=english`,
+        cookie: `L=english;`,
       },
       transformRequest: [
         // // eslint-disable-next-line @typescript-eslint/no-unused-vars
