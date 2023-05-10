@@ -17,9 +17,13 @@ export class PlaylistsService extends PayloadService {
       listid: +id,
       language,
     })
+    try {
+      const playlistResults = this.playlistPayload(response)
 
-    const playlistResults = this.playlistPayload(response)
-
-    return playlistResults
+      return playlistResults
+    } catch (error) {
+      console.error('Failed to parse playlist payload', error, response)
+      throw error
+    }
   }
 }
