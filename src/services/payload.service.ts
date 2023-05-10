@@ -241,6 +241,7 @@ export class PayloadService extends ApiService {
     const songPayload: SongResponse = {
       id: song?.id,
       name: song?.title,
+      description: song?.subtitle,
       type: song?.type,
       album: { id: moreInfo.album_id, name: moreInfo.album, url: moreInfo.album_url },
       year: song?.year,
