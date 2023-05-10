@@ -14,7 +14,6 @@ export class ApiService {
     this.config = config
     this.baseURL = config.baseURL
     this.endpoints = config.endpoint
-    const defaultTransformer = axios.defaults.transformRequest
     this.httpClient = axios.create({
       baseURL: this.baseURL,
       params: {
@@ -22,16 +21,11 @@ export class ApiService {
         _marker: '0',
         ctx: 'web6dot0',
       },
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      transformRequest: [
-        // // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        // (data, headers) => {
-        //   return data
-        // },
-        ...(!defaultTransformer ? [] : Array.isArray(defaultTransformer) ? defaultTransformer : [defaultTransformer]),
-      ],
+    })
+    this.httpClient.interceptors.request.use((value) => {
+      value.headers['Content-Type'] = 'application/json'
+      value.headers['Set-Cookie'] = 'L=english; gdpr_acceptance=true; DL=english'
+      return value
     })
   }
 
@@ -41,8 +35,12 @@ export class ApiService {
 
     const res = await this.httpClient.get<T>('', {
       params: { __call: url, ...queryParams },
-      headers: { Cookie: 'L=english; gdpr_acceptance=true; DL=english' },
+      headers: {
+        // 'Set-Cookie': 'L=english; gdpr_acceptance=true; DL=english',
+        // cookie: 'L=english; gdpr_acceptance=true; DL=english',
+      },
     })
+    console.error(`get_${url}`, res.config)
     return res.data
   }
 }
