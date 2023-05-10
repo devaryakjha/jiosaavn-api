@@ -29,11 +29,20 @@ export class ApiService {
     })
   }
 
-  protected async http<T>(url: string, isVersion4: boolean, query?: Record<string, string | number>): Promise<T> {
+  protected async http<T>(url: string, isVersion4: boolean, query: Record<string, string | number> = {}): Promise<T> {
     const v4 = isVersion4 ? { api_version: 4 } : undefined
     const queryParams = { ...v4, ...query }
-
-    const res = await this.httpClient.get<T>('', { params: { __call: url, ...queryParams } })
+    const hasLanguageParams = Object.keys(query).some((key) => key === 'language' || key === 'lang')
+    const res = await this.httpClient.get<T>('', {
+      params: { __call: url, ...queryParams },
+      headers: hasLanguageParams
+        ? {
+            'Set-Cookie': `L=${encodeURIComponent(
+              query['language'] || query['lang']
+            )}; gdpr_acceptance=true; DL=english`,
+          }
+        : undefined,
+    })
     console.error(`get_${url}`, res.config)
     return res.data
   }
