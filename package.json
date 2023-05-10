@@ -22,6 +22,7 @@
     "pre-commit": "yarn lint && yarn format"
   },
   "dependencies": {
+    "axios": "^1.4.0",
     "celebrate": "^15.0.1",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",

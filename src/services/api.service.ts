@@ -1,10 +1,10 @@
-import got from 'got-cjs'
+import axios from 'axios'
 import { getConfig } from '../configs'
-import type { Got } from 'got-cjs'
 import type { Config } from '../interfaces/config.interface'
+import type { Axios } from 'axios'
 
 export class ApiService {
-  private httpClient: Got
+  private httpClient: Axios
   protected config: Config
   private baseURL: Config['baseURL']
   protected endpoints: Config['endpoint']
@@ -14,36 +14,33 @@ export class ApiService {
     this.config = config
     this.baseURL = config.baseURL
     this.endpoints = config.endpoint
-
-    this.httpClient = got.extend({
-      prefixUrl: this.baseURL,
-      searchParams: new URLSearchParams([
-        ['_format', 'json'],
-        ['_marker', '0'],
-        ['ctx', 'web6dot0'],
-      ]),
-      responseType: 'json',
-      hooks: {
-        beforeRequest: [
-          (options) => {
-            // set default language in cookie
-            const languageHeader = (options.searchParams as URLSearchParams).get('language')
-
-            if (languageHeader !== null) {
-              options.headers = {
-                cookie: `L=${encodeURIComponent(languageHeader)}; gdpr_acceptance=true; DL=english`,
-              }
-            }
-          },
-        ],
+    const defaultTransformer = axios.defaults.transformRequest
+    this.httpClient = axios.create({
+      baseURL: this.baseURL,
+      params: {
+        _format: 'json',
+        _marker: '0',
+        ctx: 'web6dot0',
       },
+      headers: {
+        'Content-Type': 'application/json',
+        cookie: `L=english; gdpr_acceptance=true; DL=english`,
+      },
+      transformRequest: [
+        // // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        // (data, headers) => {
+        //   return data
+        // },
+        ...(!defaultTransformer ? [] : Array.isArray(defaultTransformer) ? defaultTransformer : [defaultTransformer]),
+      ],
     })
   }
 
-  protected http<T>(url: string, isVersion4: boolean, query?: Record<string, string | number>): Promise<T> {
+  protected async http<T>(url: string, isVersion4: boolean, query?: Record<string, string | number>): Promise<T> {
     const v4 = isVersion4 ? { api_version: 4 } : undefined
     const queryParams = { ...v4, ...query }
 
-    return this.httpClient<T>({ searchParams: { __call: url, ...queryParams } }).json()
+    const res = await this.httpClient.get<T>('', { params: { __call: url, ...queryParams } })
+    return res.data
   }
 }
