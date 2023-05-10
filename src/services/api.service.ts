@@ -25,6 +25,7 @@ export class ApiService {
     this.httpClient.interceptors.request.use((value) => {
       value.headers['Content-Type'] = 'application/json'
       value.headers['Set-Cookie'] = 'L=english; gdpr_acceptance=true; DL=english'
+      value.headers['cookie'] = 'L=english; gdpr_acceptance=true; DL=english'
       return value
     })
   }
@@ -33,13 +34,7 @@ export class ApiService {
     const v4 = isVersion4 ? { api_version: 4 } : undefined
     const queryParams = { ...v4, ...query }
 
-    const res = await this.httpClient.get<T>('', {
-      params: { __call: url, ...queryParams },
-      headers: {
-        // 'Set-Cookie': 'L=english; gdpr_acceptance=true; DL=english',
-        // cookie: 'L=english; gdpr_acceptance=true; DL=english',
-      },
-    })
+    const res = await this.httpClient.get<T>('', { params: { __call: url, ...queryParams } })
     console.error(`get_${url}`, res.config)
     return res.data
   }
