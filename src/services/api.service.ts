@@ -24,8 +24,6 @@ export class ApiService {
     })
     this.httpClient.interceptors.request.use((value) => {
       value.headers['Content-Type'] = 'application/json'
-      // value.headers['Set-Cookie'] = 'L=english; gdpr_acceptance=true; DL=english'
-      // value.headers['cookie'] = 'L=hindi,english; gdpr_acceptance=true; DL=english'
       return value
     })
   }
@@ -37,9 +35,7 @@ export class ApiService {
     const res = await this.httpClient.get<T>('', {
       params: { __call: url, ...queryParams },
       headers: {
-        Cookie: `L=${encodeURIComponent(
-          query['language'] || query['lang'] || 'english'
-        )}; gdpr_acceptance=true; DL=english`,
+        Cookie: `DL=english; L=${encodeURIComponent(query['language'] || query['lang'] || 'english')};`,
       },
     })
     console.error(`get_${url}`, JSON.stringify(res.config.headers))
