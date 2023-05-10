@@ -1,8 +1,11 @@
 name: Docs
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Enter branch to deploy'
+        required: true
+        default: 'main'
 jobs:
   deploy:
     name: Deploy
