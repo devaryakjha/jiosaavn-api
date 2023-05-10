@@ -17,9 +17,9 @@ export class PlaylistsController {
     next: NextFunction
   ) => {
     try {
-      const { id } = req.query
+      const { id, language } = req.query
 
-      const result = await this.playlistsService.detailsById(id as string)
+      const result = await this.playlistsService.detailsById(id as string, { language: language as string })
 
       res.json({ status: globalConstants.status.success, message: null, data: result })
     } catch (error) {

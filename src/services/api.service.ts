@@ -24,7 +24,8 @@ export class ApiService {
     })
     this.httpClient.interceptors.request.use((value) => {
       value.headers['Content-Type'] = 'application/json'
-      value.headers['Set-Cookie'] = 'L=english; gdpr_acceptance=true; DL=english'
+      // value.headers['Set-Cookie'] = 'L=english; gdpr_acceptance=true; DL=english'
+      // value.headers['cookie'] = 'L=hindi,english; gdpr_acceptance=true; DL=english'
       return value
     })
   }
@@ -32,18 +33,16 @@ export class ApiService {
   protected async http<T>(url: string, isVersion4: boolean, query: Record<string, string | number> = {}): Promise<T> {
     const v4 = isVersion4 ? { api_version: 4 } : undefined
     const queryParams = { ...v4, ...query }
-    const hasLanguageParams = Object.keys(query).some((key) => key === 'language' || key === 'lang')
+
     const res = await this.httpClient.get<T>('', {
       params: { __call: url, ...queryParams },
-      headers: hasLanguageParams
-        ? {
-            'Set-Cookie': `L=${encodeURIComponent(
-              query['language'] || query['lang']
-            )}; gdpr_acceptance=true; DL=english`,
-          }
-        : undefined,
+      headers: {
+        Cookie: `L=${encodeURIComponent(
+          query['language'] || query['lang'] || 'english'
+        )}; gdpr_acceptance=true; DL=english`,
+      },
     })
-    console.error(`get_${url}`, res.config)
+    console.error(`get_${url}`, JSON.stringify(res.config.headers))
     return res.data
   }
 }
