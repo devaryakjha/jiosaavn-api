@@ -35,11 +35,11 @@ export class ApiService {
   ): Promise<T> {
     const v4 = isVersion4 ? { api_version: 4 } : undefined
     const queryParams = { ...v4, ...query }
-    const language: string | undefined = query['language'] as string | undefined
+    const language = (query['language'] as string | undefined) || 'english'
     const res = await this.httpClient.get<T>('', {
       params: { __call: url, ...queryParams },
       headers: {
-        Cookie: typeof language === 'string' ? `DL=english; L=${encodeURIComponent(language)};` : 'DL=english;',
+        Cookie: `DL=english; L=${encodeURIComponent(language)};`,
       },
     })
     console.error(`get_${url}`, JSON.stringify(res.config))

@@ -1,4 +1,3 @@
-import { hostname } from 'os'
 import { cipher, util } from 'node-forge'
 
 // create download links for different bitrates
@@ -35,7 +34,8 @@ export const createDownloadLinks = (encryptedMediaUrl: string) => {
 }
 
 // create image links for different resolutions
-export const createImageLinks = (link = `${hostname()}/audio.jpg`) => {
+export const createImageLinks = (link?: string) => {
+  if (!link) return []
   const qualities = ['50x50', '150x150', '500x500']
 
   return (

@@ -10,9 +10,12 @@ export class ModulesService extends PayloadService {
     const response = await this.http<ModulesRequest>(this.endpoints.modules, true, {
       language,
     })
-
-    const modulesResult = this.modulesPayload(response)
-
-    return modulesResult
+    try {
+      const modulesResult = this.modulesPayload(response)
+      return modulesResult
+    } catch (error) {
+      console.error(error)
+      throw error
+    }
   }
 }
