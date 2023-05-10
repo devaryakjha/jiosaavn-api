@@ -25,7 +25,6 @@ export class ApiService {
     this.httpClient.interceptors.request.use((value) => {
       value.headers['Content-Type'] = 'application/json'
       value.headers['Set-Cookie'] = 'L=english; gdpr_acceptance=true; DL=english'
-      value.headers['cookie'] = 'L=english; gdpr_acceptance=true; DL=english'
       return value
     })
   }
