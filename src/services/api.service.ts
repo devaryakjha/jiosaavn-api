@@ -24,7 +24,6 @@ export class ApiService {
       },
       headers: {
         'Content-Type': 'application/json',
-        cookie: `L=english;`,
       },
       transformRequest: [
         // // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -40,7 +39,10 @@ export class ApiService {
     const v4 = isVersion4 ? { api_version: 4 } : undefined
     const queryParams = { ...v4, ...query }
 
-    const res = await this.httpClient.get<T>('', { params: { __call: url, ...queryParams } })
+    const res = await this.httpClient.get<T>('', {
+      params: { __call: url, ...queryParams },
+      headers: { Cookie: 'L=english; gdpr_acceptance=true; DL=english' },
+    })
     return res.data
   }
 }
