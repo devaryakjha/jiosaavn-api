@@ -342,6 +342,7 @@ export class PayloadService extends ApiService {
       id: playlist?.id,
       userId: playlist?.more_info.uid,
       name: playlist?.title,
+      description: playlist?.subtitle,
       followerCount: playlist?.more_info.follower_count,
       songCount: playlist?.list_count,
       fanCount: playlist?.more_info.fan_count,
@@ -352,7 +353,7 @@ export class PayloadService extends ApiService {
       shares: playlist?.more_info.share,
       image: createImageLinks(playlist?.image),
       url: playlist?.perma_url,
-      songs: playlist?.list?.map((song) => this.v4SongPayload(song)) ?? [],
+      songs: Array.isArray(playlist.list) ? playlist.list.map((song) => this.v4SongPayload(song)) : [],
     }
 
     return playlistPayload

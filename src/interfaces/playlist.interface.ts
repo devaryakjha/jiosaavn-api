@@ -22,7 +22,7 @@ export interface PlaylistRequest {
   explicit_content: string
   list_count: string
   list_type: string
-  list: V4SongRequest[]
+  list: string | V4SongRequest[]
   more_info: PlaylistRequestMoreInfo
   modules: Modules
 }
@@ -89,6 +89,7 @@ export interface PlaylistResponse {
   id: string
   userId: string
   name: string
+  description: string
   songCount: string
   fanCount: string
   followerCount: string
