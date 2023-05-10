@@ -24,7 +24,7 @@ export class ApiService {
       },
       headers: {
         'Content-Type': 'application/json',
-        cookie: `L=english; gdpr_acceptance=true; DL=english`,
+        cookie: `L=english; DL=english`,
       },
       transformRequest: [
         // // eslint-disable-next-line @typescript-eslint/no-unused-vars
