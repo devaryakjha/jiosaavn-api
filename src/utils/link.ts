@@ -39,12 +39,18 @@ export const createImageLinks = (link = `${hostname()}/audio.jpg`) => {
   const qualities = ['50x50', '150x150', '500x500']
 
   return (
-    qualities.map((quality) => ({
-      quality,
-      link: link
-        .replace(new RegExp('\\d{1,3}x\\d{1,3}'), quality)
-        .replace(new RegExp('\\d{1,3}x\\d{1,3}_\\d{1,3}x\\d{1,3}', 'i'), quality),
-    })) || []
+    qualities.map((quality) => {
+      const newlink = new URL(
+        link
+          .replace(new RegExp('\\d{1,3}x\\d{1,3}'), quality)
+          .replace(new RegExp('\\d{1,3}x\\d{1,3}_\\d{1,3}x\\d{1,3}', 'i'), quality)
+      )
+      newlink.search = ''
+      return {
+        quality,
+        link: newlink.href,
+      }
+    }) || []
   )
 }
 
