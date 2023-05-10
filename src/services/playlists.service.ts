@@ -13,7 +13,7 @@ export class PlaylistsService extends PayloadService {
   public detailsById = async (id: string, { language }: IDetailsById): Promise<PlaylistResponse> => {
     // api v4 does not contain media_preview_url
 
-    const response = await this.http<PlaylistRequest>(this.endpoints.playlists.id, false, {
+    const response = await this.http<PlaylistRequest>(this.endpoints.playlists.id, true, {
       listid: +id,
       language,
     })

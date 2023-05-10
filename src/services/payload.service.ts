@@ -27,7 +27,13 @@ import type {
   AlbumSearchRequest,
   AlbumSearchResponse,
 } from '../interfaces/album.interface'
-import type { SongRequest, SongResponse, SongSearchRequest, SongSearchResponse } from '../interfaces/song.interface'
+import type {
+  SongRequest,
+  SongResponse,
+  SongSearchRequest,
+  SongSearchResponse,
+  V4SongRequest,
+} from '../interfaces/song.interface'
 
 export class PayloadService extends ApiService {
   private mapArtists = (artists: Artist[]): AlbumArtistResponse[] => {
@@ -230,6 +236,33 @@ export class PayloadService extends ApiService {
     return payload
   }
 
+  protected v4SongPayload = (song: V4SongRequest): SongResponse => {
+    const moreInfo = song?.more_info
+    const songPayload: SongResponse = {
+      id: song?.id,
+      name: song?.title,
+      type: song?.type,
+      album: { id: moreInfo.album_id, name: moreInfo.album, url: moreInfo.album_url },
+      year: song?.year,
+      releaseDate: moreInfo.release_date,
+      duration: moreInfo.duration,
+      label: moreInfo.label,
+      primaryArtists: moreInfo?.artistMap.primary_artists,
+      primaryArtistsId: moreInfo?.artistMap.primary_artists?.[0]?.id,
+      featuredArtists: moreInfo?.artistMap.featured_artists,
+      featuredArtistsId: moreInfo?.artistMap.featured_artists?.[0]?.id,
+      explicitContent: song?.explicit_content,
+      playCount: song?.play_count,
+      language: song?.language,
+      hasLyrics: moreInfo.has_lyrics,
+      url: song?.perma_url,
+      copyright: moreInfo.copyright_text,
+      image: createImageLinks(song?.image),
+      downloadUrl: createDownloadLinks(moreInfo.encrypted_media_url),
+    }
+    return songPayload
+  }
+
   protected songPayload = (song: SongRequest): SongResponse => {
     const songPayload: SongResponse = {
       id: song?.id,
@@ -306,20 +339,20 @@ export class PayloadService extends ApiService {
 
   protected playlistPayload = (playlist: PlaylistRequest) => {
     const playlistPayload: PlaylistResponse = {
-      id: playlist?.listid,
-      userId: playlist?.uid,
-      name: playlist?.listname,
-      followerCount: playlist?.follower_count,
-      songCount: playlist?.count || playlist?.list_count,
-      fanCount: playlist?.fan_count?.toString(),
-      username: playlist?.username,
-      firstname: playlist?.firstname,
-      lastname: playlist?.lastname,
+      id: playlist?.id,
+      userId: playlist?.more_info.uid,
+      name: playlist?.title,
+      followerCount: playlist?.more_info.follower_count,
+      songCount: playlist?.list_count,
+      fanCount: playlist?.more_info.fan_count,
+      username: playlist?.more_info.username,
+      firstname: playlist?.more_info.firstname,
+      lastname: playlist?.more_info.lastname,
       language: playlist?.language,
-      shares: playlist?.share,
+      shares: playlist?.more_info.share,
       image: createImageLinks(playlist?.image),
       url: playlist?.perma_url,
-      songs: playlist?.songs?.map((song: SongRequest) => this.songPayload(song)) ?? [],
+      songs: playlist?.list?.map((song) => this.v4SongPayload(song)) ?? [],
     }
 
     return playlistPayload

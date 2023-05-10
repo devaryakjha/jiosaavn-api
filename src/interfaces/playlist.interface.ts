@@ -1,5 +1,6 @@
+import type { AlbumArtistResponse } from './album.interface'
 import type { DownloadLink } from './image.interface'
-import type { SongRequest, SongResponse } from './song.interface'
+import type { SongResponse, V4SongRequest } from './song.interface'
 
 export interface PlaylistSearchRequest {
   total: number
@@ -7,43 +8,77 @@ export interface PlaylistSearchRequest {
   results: PlaylistRequest[]
 }
 
-interface Playlist {
-  artists: any[]
-  listid: string
-  listname: string
+export interface PlaylistRequest {
+  id: string
+  title: string
+  subtitle: string
+  header_desc: string
+  type: string
   perma_url: string
-  follower_count: string
+  image: string
+  language: string
+  year: string
+  play_count: string
+  explicit_content: string
+  list_count: string
+  list_type: string
+  list: V4SongRequest[]
+  more_info: PlaylistRequestMoreInfo
+  modules: Modules
+}
+
+export interface Modules {
+  list: Artists
+  relatedPlaylist: Artists
+  currentlyTrendingPlaylists: Artists
+  artists: Artists
+}
+
+export interface Artists {
+  source: string
+  position: number
+  score: string
+  bucket: string
+  scroll_type: string
+  title: string
+  subtitle: string
+  highlight: string
+  simpleHeader: boolean
+  noHeader: boolean
+  view_more: any[]
+  is_JT_module: boolean
+  source_api?: boolean
+  source_params?: SourceParams
+}
+
+export interface SourceParams {
+  entity_type?: string
+  entity_language?: string
+  listid?: string
+}
+
+export interface PlaylistRequestMoreInfo {
   uid: string
+  is_dolby_content: boolean
+  subtype: any[]
   last_updated: string
   username: string
   firstname: string
   lastname: string
-  is_followed: any
+  is_followed: string
   isFY: boolean
-  image: string
+  follower_count: string
+  fan_count: string
+  playlist_type: string
   share: string
-  songs: SongRequest[]
-  type: string
-  list_count: string
-  fan_count: number
-  H2: any
-  is_dolby_playlist: boolean
-  subheading: any
   sub_types: any[]
   images: any[]
-  video_available: boolean
-  video_count: number
+  H2: null
+  subheading: null
+  video_count: string
+  artists: AlbumArtistResponse[]
+  subtitle_desc: string[]
 }
-
-export interface PlaylistRequest extends Playlist {
-  artist_name?: string[]
-  count: string
-  language: string
-  entity_type: string
-  entity_sub_type: string
-  numsongs: any
-}
-
 export interface PlaylistSearchResponse {
   total: number
   start: number

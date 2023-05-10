@@ -42,7 +42,7 @@ export class ApiService {
         Cookie: typeof language === 'string' ? `DL=english; L=${encodeURIComponent(language)};` : 'DL=english;',
       },
     })
-    console.error(`get_${url}`, JSON.stringify(res.config.headers))
+    console.error(`get_${url}`, JSON.stringify(res.config))
     return res.data
   }
 }
