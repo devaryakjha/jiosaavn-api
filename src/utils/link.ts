@@ -3,7 +3,7 @@ import { cipher, util } from 'node-forge'
 
 // create download links for different bitrates
 export const createDownloadLinks = (encryptedMediaUrl: string) => {
-  if (!encryptedMediaUrl) return false
+  if (!encryptedMediaUrl) return []
 
   const qualities = [
     { id: '_12', bitrate: '12kbps' },
@@ -29,7 +29,7 @@ export const createDownloadLinks = (encryptedMediaUrl: string) => {
     qualities.map((quality) => ({
       quality: quality.bitrate,
       link: decryptedLink.replace('_96', quality.id),
-    })) || false
+    })) || []
 
   return links
 }

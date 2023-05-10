@@ -238,6 +238,9 @@ export class PayloadService extends ApiService {
 
   protected v4SongPayload = (song: V4SongRequest): SongResponse => {
     const moreInfo = song?.more_info
+    const artistMap = moreInfo?.artistMap
+    const primaryArtists = artistMap?.primary_artists
+    const featuredArtists = artistMap?.featured_artists
     const songPayload: SongResponse = {
       id: song?.id,
       name: song?.title,
@@ -248,9 +251,13 @@ export class PayloadService extends ApiService {
       releaseDate: moreInfo.release_date,
       duration: moreInfo.duration,
       label: moreInfo.label,
-      primaryArtists: moreInfo?.artistMap.primary_artists,
+      primaryArtists: Array.isArray(primaryArtists)
+        ? primaryArtists.map((artist) => ({ ...artist, image: Array.isArray(artist.image) ? artist.image : [] }))
+        : [],
       primaryArtistsId: moreInfo?.artistMap.primary_artists?.[0]?.id,
-      featuredArtists: moreInfo?.artistMap.featured_artists,
+      featuredArtists: Array.isArray(featuredArtists)
+        ? featuredArtists.map((artist) => ({ ...artist, image: Array.isArray(artist.image) ? artist.image : [] }))
+        : [],
       featuredArtistsId: moreInfo?.artistMap.featured_artists?.[0]?.id,
       explicitContent: song?.explicit_content,
       playCount: song?.play_count,
