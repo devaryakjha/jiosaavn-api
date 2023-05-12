@@ -317,7 +317,7 @@ export class PayloadService extends ApiService {
       playCount: album?.play_count,
       language: album?.language,
       explicitContent: album?.explicit_content,
-      songCount: album?.more_info?.song_count || album?.songs?.length?.toString(),
+      songCount: album?.more_info?.song_count || album?.list?.length?.toString(),
       url: album?.perma_url,
       primaryArtistsId: album?.primary_artists_id,
       primaryArtists: album?.primary_artists || this.mapArtists(album?.more_info?.artistMap?.primary_artists),
@@ -328,8 +328,8 @@ export class PayloadService extends ApiService {
     }
 
     // if album details contain song list
-    if (album.songs) {
-      albumPayload.songs = album?.songs?.map((song: SongRequest) => this.songPayload(song))
+    if (album.list) {
+      albumPayload.songs = album?.list?.map((song) => this.v4SongPayload(song))
     }
 
     return albumPayload

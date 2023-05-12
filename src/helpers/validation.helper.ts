@@ -40,14 +40,15 @@ export const albumsSchema = celebrate(
     [Segments.QUERY]: Joi.object()
       .keys({
         id: Joi.string(),
-        link: Joi.string().custom((value, helper) => {
-          if (value.includes(`jiosaavn.com/album/`)) {
-            const token = value.split(`album/`)[1].split('/')[1].slice(0, 11)
+        link: Joi.string().custom((value: string, helper) => {
+          if ([`jiosaavn.com/album/`, `jiosaavn.com/s/album/`].some((i) => value.includes(i))) {
+            const splitValues = value.split('/')
+            const token = splitValues?.[splitValues.length - 1]
 
             return token
           } else {
             return helper.message({
-              custom: 'invalid album link',
+              custom: `invalid album link ${value}`,
             })
           }
         }),

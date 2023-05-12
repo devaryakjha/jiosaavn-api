@@ -19,7 +19,7 @@ export class AlbumsService extends PayloadService {
 
   public detailsByLink = async (link: string): Promise<AlbumResponse> => {
     // api v4 does not contain media_preview_url
-    const response = await this.http<AlbumRequest>(this.endpoints.albums.link, false, {
+    const response = await this.http<AlbumRequest>(this.endpoints.albums.link, true, {
       token: link,
       type: 'album',
     })

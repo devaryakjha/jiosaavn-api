@@ -1,6 +1,6 @@
 import type { DownloadLink } from './image.interface'
 import type { Artist } from './artist.interface'
-import type { SongRequest, SongResponse } from './song.interface'
+import type { SongResponse, V4SongRequest } from './song.interface'
 
 export interface AlbumSearchRequest {
   total: number
@@ -17,7 +17,7 @@ interface Album {
   albumid: string
   perma_url: string
   image: string
-  songs: SongRequest[]
+  list: V4SongRequest[]
 }
 
 export interface AlbumRequest extends Album {
@@ -31,7 +31,6 @@ export interface AlbumRequest extends Album {
   explicit_content: string
   list_count: string
   list_type: string
-  list: string
   more_info: {
     query: string
     text: string
